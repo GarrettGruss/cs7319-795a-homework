@@ -1,5 +1,5 @@
+Garrett Gruss | CS7319-795a Homework 2 Report | 9-5-2025
 # Part A
-
 ## Single Program Results
 ![single program results](single_program_results.png)
 ## Single Program Diagram

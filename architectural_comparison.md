@@ -1,3 +1,4 @@
+Garrett Gruss | CS7319-795a Homework 2 Comparion | 9-5-2025
 # Architecture Comparison: Single-Program vs MapReduce
 
 This document compares single-program architecture and MapReduce distributed processing for sentiment analysis. 
