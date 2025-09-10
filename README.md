@@ -81,7 +81,7 @@ The project includes a comprehensive quotes dataset (`data/quotes.json`) with 51
 ### Local Development
 
 #### Full Stack Development
-1. **Terminal 1** - Start backend: `uvicorn src/backend/main:app --host 0.0.0.0 --port 8080 --reload`
+1. **Terminal 1** - Start backend: `PYTHONPATH=src uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload`
 2. **Terminal 2** - Start frontend: `src/frontend/streamlit run app.py`
 3. Access frontend at `http://localhost:8501` (connects to backend automatically)
 
