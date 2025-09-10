@@ -65,8 +65,8 @@ def display_quote(quote_data):
 
 def main():
     # Header
-    st.title("💡 Inspirational Quotes")
-    st.markdown("*Get inspired with randomly selected motivational quotes*")
+    st.title("🤓 Inspirational Quotes")
+    st.markdown("*What is?*")
     
     # Initialize API client
     api_client = QuotesAPIClient()
@@ -83,17 +83,12 @@ def main():
             st.markdown('<div class="status-indicator status-unhealthy">🔴 API Offline</div>', 
                        unsafe_allow_html=True)
         
-        st.markdown("---")
-        st.markdown("**Backend:** FastAPI + Pydantic")
-        st.markdown("**Frontend:** Streamlit")
-        st.markdown("**Deployment:** Kubernetes (4 replicas)")
-    
     # Main content area
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
         # Fetch quotes button
-        if st.button("🎲 Get New Quotes", type="primary", use_container_width=True):
+        if st.button("Get Quotes", type="primary", use_container_width=True):
             with st.spinner("Fetching inspirational quotes..."):
                 quotes = api_client.get_quotes()
                 
@@ -103,8 +98,6 @@ def main():
     
     # Display quotes if available
     if hasattr(st.session_state, 'quotes') and st.session_state.quotes:
-        st.markdown("### Your Inspirational Quotes")
-        
         # Display fetch time
         if hasattr(st.session_state, 'last_fetch'):
             fetch_time = time.strftime("%H:%M:%S", time.localtime(st.session_state.last_fetch))
@@ -113,26 +106,6 @@ def main():
         # Display quotes in a grid
         for i, quote in enumerate(st.session_state.quotes):
             display_quote(quote)
-        
-        # Add refresh button at the bottom
-        st.markdown("---")
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col2:
-            if st.button("🔄 Refresh Quotes", use_container_width=True):
-                st.rerun()
-    
-    else:
-        # Welcome message
-        st.markdown("### Welcome!")
-        st.info("Click the **'Get New Quotes'** button above to fetch 4 randomly selected inspirational quotes from our collection of 51+ quotes.")
-        
-        # Sample quote for demonstration
-        st.markdown("#### Sample Quote:")
-        sample_quote = {
-            "quote": "Click the button above to get your personalized inspirational quotes!",
-            "author": "Quotes API"
-        }
-        display_quote(sample_quote)
 
 if __name__ == "__main__":
     main()
