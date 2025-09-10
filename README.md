@@ -34,6 +34,10 @@ The project includes a comprehensive quotes dataset (`data/quotes.json`) with 51
 - **Pydantic** - Data validation and settings management using Python type annotations
 - **Uvicorn** - ASGI server for running the FastAPI application
 
+### Frontend Technology
+- **Streamlit** - Interactive web application framework for data apps
+- **Requests** - HTTP library for API communication
+
 ### Containerization
 - Dockerized service that runs locally
 - Container configured to expose port 8080
@@ -51,7 +55,16 @@ The project includes a comprehensive quotes dataset (`data/quotes.json`) with 51
 .
 ├── data/
 │   └── quotes.json          # Pool of inspirational quotes
-├── src/                     # Application source code
+├── src/
+│   ├── backend/             # FastAPI application
+│   │   ├── model/           # Pydantic models
+│   │   ├── service/         # Business logic
+│   │   ├── controller/      # API routes
+│   │   └── main.py         # FastAPI entry point
+│   └── frontend/            # Streamlit application
+│       ├── app.py          # Streamlit UI
+│       └── api_client.py   # API client
+├── tests/                   # Unit tests
 ├── Dockerfile               # Docker containerization
 ├── k8s.yaml                # Kubernetes manifests
 └── README.md               # This file
@@ -66,12 +79,15 @@ The project includes a comprehensive quotes dataset (`data/quotes.json`) with 51
 - kubectl configured to work with Minikube
 
 ### Local Development
-1. Install dependencies: `pip install fastapi uvicorn pydantic`
-2. Run locally: `uvicorn main:app --host 0.0.0.0 --port 8080`
-3. Build and run the Docker container locally
-4. Verify the application serves quotes on `localhost:8080/api/quotes`
-5. Check the homepage at `localhost:8080/`
-6. View interactive API docs at `localhost:8080/docs`
+
+#### Full Stack Development
+1. **Terminal 1** - Start backend: `uvicorn src/backend/main:app --host 0.0.0.0 --port 8080 --reload`
+2. **Terminal 2** - Start frontend: `src/frontend/streamlit run app.py`
+3. Access frontend at `http://localhost:8501` (connects to backend automatically)
+
+#### Testing
+- Run unit tests: `python -m pytest tests/`
+- Test API directly: `curl http://localhost:8080/api/quotes`
 
 ### Kubernetes Deployment
 1. Apply Kubernetes manifests: `kubectl apply -f k8s.yaml`
