@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: garrettgruss/quotes-backend
+        image: garrettgruss/quotes-backend:homework-4
         ports:
         - containerPort: 8000
         env:
@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: garrettgruss/quotes-frontend
+        image: garrettgruss/quotes-frontend:homework-4
         ports:
         - containerPort: 8501
         env:
@@ -90,4 +90,4 @@ spec:
     - protocol: TCP
       port: 8501
       targetPort: 8501
-      nodePort: 30100
+      nodePort: 30080
