@@ -24,6 +24,11 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
     - name: Build and push Backend Docker image
       uses: docker/build-push-action@v6
       with:
@@ -33,5 +38,6 @@ jobs:
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/quotes-backend:latest
           ${{ secrets.DOCKER_USERNAME }}/quotes-backend:${{ github.sha }}
+          ${{ secrets.DOCKER_USERNAME }}/quotes-backend:${{ steps.extract_branch.outputs.branch }}
         cache-from: type=gha
         cache-to: type=gha,mode=max

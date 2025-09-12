@@ -1,6 +1,10 @@
 import streamlit as st
 from api_client import QuotesAPIClient
 import time
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Page configuration
 st.set_page_config(
@@ -65,11 +69,11 @@ def display_quote(quote_data):
 
 def main():
     # Header
-    st.title("🤓 Inspirational Quotes")
+    st.title("Inspirational Quotes")
     st.markdown("*What is?*")
     
     # Initialize API client
-    api_client = QuotesAPIClient()
+    api_client = QuotesAPIClient(base_url=os.getenv("BACKEND_URL"))
     
     # Sidebar for API status and controls
     with st.sidebar:
