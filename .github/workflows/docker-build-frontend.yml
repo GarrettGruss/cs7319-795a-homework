@@ -37,7 +37,6 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/quotes-frontend:latest
-          ${{ secrets.DOCKER_USERNAME }}/quotes-frontend:${{ github.sha }}
           ${{ secrets.DOCKER_USERNAME }}/quotes-frontend:${{ steps.extract_branch.outputs.branch }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
