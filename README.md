@@ -45,4 +45,4 @@ This project implements a FastAPI REST API with Pydantic models that serves insp
 1. Apply Kubernetes manifests: `kubectl apply -f k8s.yaml`
 2. Verify deployment: `kubectl get deployments`
 3. Check service: `kubectl get services`
-4. Access the application through Minikube service
+4. Access the application through Minikube service `minikube service frontend-service --url`
