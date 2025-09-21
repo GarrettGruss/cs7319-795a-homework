@@ -1,0 +1,12 @@
+[
+  {"quote": "Test quote one for unit testing.", "author": "Test Author One"},
+  {"quote": "Test quote two for unit testing.", "author": "Test Author Two"},
+  {"quote": "Test quote three for unit testing.", "author": "Test Author Three"},
+  {"quote": "Test quote four for unit testing.", "author": "Test Author Four"},
+  {"quote": "Test quote five for unit testing.", "author": "Test Author Five"},
+  {"quote": "Test quote six for unit testing.", "author": "Test Author Six"},
+  {"quote": "Test quote seven for unit testing.", "author": "Test Author Seven"},
+  {"quote": "Test quote eight for unit testing.", "author": "Test Author Eight"},
+  {"quote": "Test quote nine for unit testing.", "author": "Test Author Nine"},
+  {"quote": "Test quote ten for unit testing.", "author": "Test Author Ten"}
+]

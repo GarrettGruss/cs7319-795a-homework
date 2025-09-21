@@ -1,75 +1,48 @@
-# CS 7319 Homework 2: Sentiment Analysis in Two Architectures
+# CS 7319 Homework 4 - Kubernetes Deployment
 
-This project implements sentiment analysis using two different software architectures to demonstrate architectural trade-offs and design patterns.
+A REST API that serves inspirational quotes, containerized with Docker and deployed on Kubernetes using Minikube.
 
-## Project Overview
+![application's frontend](image.png)
 
-The goal is to analyze text datasets and classify posts based on sentiment using keyword-based rules, implementing the same functionality in two distinct architectural styles:
+## Assignment Overview
 
-- **Part A**: Single-program architecture
-- **Part B**: MapReduce-style pipeline architecture
+This project implements a FastAPI REST API with Pydantic models that serves inspirational quotes randomly selected from a local pool. The application is containerized and deployed on Minikube with 4 replicas.
 
-## Problem Statement
+**Instructor:** Dr. Isaac Chow  
+**Due Date:** September 21, 2025
 
-Given a text dataset (one post per line), classify posts based on sentiment keywords:
+## Architecture
 
-### Keywords
-- **Positive**: happy, excited, thrilled, love
-- **Negative**: sad, depressed, angry, upset
+### Backend Technology
+- **FastAPI** - Modern, fast web framework for building APIs with Python
+- **Pydantic** - Data validation and settings management using Python type annotations
+- **Uvicorn** - ASGI server for running the FastAPI application
 
-### Classification Rules
-- **Positive**: contains e1 positive keyword and no negative keyword
-- **Negative**: contains e1 negative keyword and no positive keyword  
-- **Mixed**: contains both positive and negative keywords
-- **Neutral**: otherwise
+### Frontend Technology
+- **Streamlit** - Interactive web application framework for data apps
+- **Requests** - HTTP library for API communication
 
-## Data
+## Getting Started
 
-The project includes datasets in the `data/` folder:
-- `sample_us_posts.txt` - starter dataset
-- `sample_us_posts_mixed.txt` - dataset with mixed sentiments
-- Keywords are defined in `keywords.csv`
+### Prerequisites
+- Python 3.8+ for local development
+- Docker installed locally
+- Minikube installed and running
+- kubectl configured to work with Minikube
 
-## Architecture Implementations
+### Local Development
 
-### Part A - Single-Program Architecture
-A straightforward, single-process program that:
-1. Reads the dataset sequentially
-2. Tokenizes and classifies each line
-3. Aggregates totals
-4. Outputs summary and verdict
+#### Full Stack Development
+1. **Terminal 1** - Start backend: `PYTHONPATH=src uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload`
+2. **Terminal 2** - Start frontend: `src/frontend/streamlit run app.py`
+3. Access frontend at `http://localhost:8501` (connects to backend automatically)
 
-**Key characteristics**: Simple, monolithic, direct data flow
+#### Testing
+- Run unit tests: `python -m pytest tests/`
+- Test API directly: `curl http://localhost:8080/api/quotes`
 
-### Part B - MapReduce-Style Architecture  
-A distributed processing simulation using Map ’ Shuffle/Group ’ Reduce pattern:
-1. **Map**: Process each line and emit (label, 1) pairs
-2. **Shuffle/Group**: Group values by sentiment label
-3. **Reduce**: Sum values per label for final totals
-
-**Key characteristics**: Parallel processing model, data partitioning, scalable design
-
-## Expected Output Format
-
-```
-Positive=123 Negative=95 Mixed=17 Neutral=64
-Verdict: Happier
-```
-
-**Verdict Rules**:
-- "Happier": Positive > Negative
-- "Sadder": Negative > Positive  
-- "Tied": Positive = Negative
-
-## Learning Outcomes
-
-- Experience two distinct architectural patterns
-- Understand trade-offs between simplicity and scalability
-- Compare code structure, data flow, and complexity
-- Analyze scalability implications for large datasets
-
-## Course Information
-
-**Course**: CS 7319 Software Architecture  
-**Instructor**: Dr. Isaac Chow  
-**Term**: Fall 2025
+### Kubernetes Deployment
+1. Apply Kubernetes manifests: `kubectl apply -f k8s.yaml`
+2. Verify deployment: `kubectl get deployments`
+3. Check service: `kubectl get services`
+4. Access the application through Minikube service `minikube service frontend-service --url`
